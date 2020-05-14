@@ -20,6 +20,12 @@ class App extends Component {
     ]
   }
 
+  toggleConfirmationAt = indexToChange => {
+    const guestsArr = this.state.guests.slice();
+    guestsArr[indexToChange].isConfirmed = !guestsArr[indexToChange].isConfirmed;
+    this.setState({guests: guestsArr});
+  };
+
   getTotalInvited = () => this.state.guests.length;
   // getAttendingGuests = () =>
   // getUnconfirmedGuests = () =>
@@ -59,7 +65,10 @@ class App extends Component {
           </tbody>
         </table>
 
-        <GuestList guests={this.state.guests} />
+        <GuestList 
+          guests={this.state.guests} 
+          toggleConfirmationAt={this.toggleConfirmationAt}
+        />
       
       </div>
     </div>
