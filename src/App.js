@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import GuestList from './components/GuestList';
-import NewGuestForm from './components/NewGuestForm';
-import Counter from './components/Counter';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
 
 class App extends Component {
 
@@ -88,44 +87,27 @@ class App extends Component {
     const numberUnconfirmed = totalInvited - numberAttending;
     return (
       <div className="App">
-      <header>
-        <h1>RSVP</h1>
-        <p>A Reservation App</p>
-        <NewGuestForm 
-          pendingGuest={this.state.pendingGuest}
-          handleNameInput={this.handleNameInput}
-          handleNameSubmit={this.handleNameSubmit}
-        />
-      </header>
-      <div className="main">
-        <div>
-          <h2>Invitees</h2>
-          <label>
-            <input 
-              type="checkbox"
-              onChange={this.toggleFilter}
-              checked={this.state.isFiltered} 
-            /> Hide those who haven't responded
-          </label>
-        </div>
 
-        <Counter
-          numberAttending={numberAttending}
-          numberUnconfirmed={numberUnconfirmed}
-          totalInvited={totalInvited}
-        />
+      <Header 
+        pendingGuest={this.state.pendingGuest}
+        handleNameInput={this.handleNameInput}
+        handleNameSubmit={this.handleNameSubmit}
+      />
 
-        <GuestList 
-          guests={this.state.guests} 
-          pendingGuest={this.state.pendingGuest}
-          toggleConfirmationAt={this.toggleConfirmationAt}
-          toggleEditingAt={this.toggleEditingAt}
-          setNameAt={this.setNameAt}
-          removeGuestAt={this.removeGuestAt}
-          isFiltered={this.state.isFiltered}
-        />
-      
-      </div>
+      <MainContent 
+        numberAttending={numberAttending}
+        numberUnconfirmed={numberUnconfirmed}
+        totalInvited={totalInvited} 
+        guests={this.state.guests} 
+        pendingGuest={this.state.pendingGuest}
+        toggleConfirmationAt={this.toggleConfirmationAt}
+        toggleEditingAt={this.toggleEditingAt}
+        setNameAt={this.setNameAt}
+        removeGuestAt={this.removeGuestAt}
+        toggleFilter={this.toggleFilter}
+        isFiltered={this.state.isFiltered}
+      />
+
     </div>
     );
   }
