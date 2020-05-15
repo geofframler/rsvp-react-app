@@ -120,6 +120,7 @@ class App extends Component {
 
         <GuestList 
           guests={this.state.guests} 
+          pendingGuest={this.state.pendingGuest}
           toggleConfirmationAt={this.toggleConfirmationAt}
           toggleEditingAt={this.toggleEditingAt}
           setNameAt={this.setNameAt}

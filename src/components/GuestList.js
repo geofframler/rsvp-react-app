@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Guest from './Guest';
+import PendingGuest from './PendingGuest';
 
 const GuestList = props => 
   <ul>
+    <PendingGuest name={props.pendingGuest} />
     {props.guests
       .filter(guest => !props.isFiltered || guest.isConfirmed)
       .map((guest, index) =>
@@ -23,6 +25,7 @@ const GuestList = props =>
 
 GuestList.propTypes = {
   guests: PropTypes.array.isRequired,
+  pendingGuest: PropTypes.string.isRequired,
   toggleConfirmationAt: PropTypes.func.isRequired,
   toggleEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired,
