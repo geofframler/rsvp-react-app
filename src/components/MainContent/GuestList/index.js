@@ -9,16 +9,16 @@ const GuestList = props =>
     <PendingGuest name={props.pendingGuest} />
     {props.guests
       .filter(guest => !props.isFiltered || guest.isConfirmed)
-      .map((guest, index) =>
+      .map((guest) =>
         <Guest 
-          key={index} 
+          key={guest.id} 
           name={guest.name} 
           isConfirmed={guest.isConfirmed} 
           isEditing={guest.isEditing}
-          handleConfirmation={() => props.toggleConfirmationAt(index)}
-          handleEditing={() => props.toggleEditingAt(index)}
-          setName={text => props.setNameAt(text, index)}
-          handleRemove={() => props.removeGuestAt(index)}
+          handleConfirmation={() => props.toggleConfirmation(guest.id)}
+          handleEditing={() => props.toggleEditing(guest.id)}
+          setName={text => props.setName(text, guest.id)}
+          handleRemove={() => props.removeGuest(guest.id)}
         />
     )}
   </ul>;
@@ -26,10 +26,10 @@ const GuestList = props =>
 GuestList.propTypes = {
   guests: PropTypes.array.isRequired,
   pendingGuest: PropTypes.string.isRequired,
-  toggleConfirmationAt: PropTypes.func.isRequired,
-  toggleEditingAt: PropTypes.func.isRequired,
-  setNameAt: PropTypes.func.isRequired,
-  removeGuestAt: PropTypes.func.isRequired,
+  toggleConfirmation: PropTypes.func.isRequired,
+  toggleEditing: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
+  removeGuest: PropTypes.func.isRequired,
   isFiltered: PropTypes.bool.isRequired
 }
 
