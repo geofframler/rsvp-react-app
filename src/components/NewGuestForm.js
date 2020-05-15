@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const NewGuestForm = props => 
   <form onSubmit={props.handleNameSubmit}>
@@ -17,5 +18,10 @@ const NewGuestForm = props =>
     </button>
   </form>
 
+NewGuestForm.propTypes = {
+  handleNameInput: PropTypes.func.isRequired,
+  handleNameSubmit: PropTypes.func.isRequired,
+  pendingGuest: PropTypes.string.isRequired,
+}
 
 export default NewGuestForm;
