@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+
 import GuestList from './components/GuestList';
+import NewGuestForm from './components/NewGuestForm'
 
 class App extends Component {
 
   state = {
     isFiltered: false,
+    pendingGuest: '',
     guests: [
       {
         name: 'Jack',
@@ -45,6 +48,24 @@ class App extends Component {
   toggleFilter = () =>
     this.setState({ isFiltered: !this.state.isFiltered })
 
+  handleNameInput = e =>
+    this.setState({ pendingGuest: e.target.value })
+  
+  handleNameSubmit = e => {
+    e.preventDefault();
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false
+        },
+        ...this.state.guests
+      ],
+      pendingGuest: '',
+    })
+  }
+
   getTotalInvited = () => this.state.guests.length;
   // getAttendingGuests = () =>
   // getUnconfirmedGuests = () =>
@@ -55,10 +76,11 @@ class App extends Component {
       <header>
         <h1>RSVP</h1>
         <p>A Reservation App</p>
-        <form>
-            <input type="text" value="Geoff" placeholder="Invite Someone" />
-            <button type="submit" name="submit" value="submit">Submit</button>
-        </form>
+        <NewGuestForm 
+          pendingGuest={this.state.pendingGuest}
+          handleNameInput={this.handleNameInput}
+          handleNameSubmit={this.handleNameSubmit}
+        />
       </header>
       <div className="main">
         <div>
